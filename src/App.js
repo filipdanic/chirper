@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Flex, Box, ThemeProvider, UIModeProvider } from 'chakra-ui';
+import {Flex, Box, ThemeProvider, UIModeProvider, Input} from 'chakra-ui';
 import usePublicProfile from './utils/usePublicProfile';
 import handleCreateProfile from './utils/handleCreateProfile';
 import loadPublicMessages from './utils/loadPublicMessages';
-import PrimaryButton from './utils/PrimaryButton';
+import PrimaryButton from './component/PrimaryButton';
 import handleLogout from './utils/handleLogout';
 import handleSelectProfile from './utils/handleSelectProfile';
+import Chat from './component/Chat';
 
 function App() {
   const [ publicMessages, setPublicMessages ] = useState();
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   usePublicProfile(setPublicMessages, setIsLoggedIn);
 
+  console.log(publicMessages)
   return (
     <ThemeProvider>
       <UIModeProvider>
@@ -40,6 +42,7 @@ function App() {
               </PrimaryButton>
             </Flex>
           }
+          {isLoggedIn && <Chat publicMessages={publicMessages} />}
         </Box>
       </UIModeProvider>
     </ThemeProvider>
