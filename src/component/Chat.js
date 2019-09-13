@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Flex, Input } from 'chakra-ui';
 import uuidv4 from 'uuidv4';
 import mkdirp from '../utils/mkdirp';
+import loadPublicMessages from '../utils/loadPublicMessages';
 
 const onSubmit = async (text, publicMessages) => {
   await mkdirp('/messages', publicMessages);
@@ -19,16 +20,24 @@ const onSubmit = async (text, publicMessages) => {
   );
 };
 
-
-const Chat = ({ publicMessages }) => {
+const Chat = ({ publicMessages, profile }) => {
   const [ message, setMessage ] = useState('');
+  const [ messages, setMessages ] = useState([]);
+  useEffect(() => {
+    async function onMount() {
+      await loadPublicMessages(publicMessages, profile, setMessages);
+    }
+    onMount();
+  }, []);
+
+  console.log(messages);
   return (
     <Flex flexDirection='column' maxWidth={800}>
       <Flex height={600} width='100%' bg='gray.50' mb={2}>
       </Flex>
       <Flex>
         <Input
-          placeholder="Message #public"
+          placeholder="Chirp chirp to #public"
           borderColor='blue.200'
           size="lg"
           onChange={e => setMessage(e.target.value)}

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import loadPublicMessages from './loadPublicMessages';
+import loadPublicMessagesArchive from './loadPublicMessagesArchive';
 
-const usePublicProfile = (setPublicMessages, setIsLoggedIn) =>
+const usePublicProfile = (setPublicMessages, setIsLoggedIn, setProfile) =>
   useEffect(() => {
     async function onMount() {
-      await loadPublicMessages(setPublicMessages, setIsLoggedIn);
+      await loadPublicMessagesArchive(setPublicMessages, setIsLoggedIn, setProfile);
     }
     onMount();
   }, []);
