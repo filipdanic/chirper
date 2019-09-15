@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { Flex, Input } from 'chakra-ui';
+import {Flex, Input, Text} from 'chakra-ui';
 import uuidv4 from 'uuidv4';
 import mkdirp from '../utils/mkdirp';
 import loadPublicMessages from '../utils/loadPublicMessages';
+import Message from './Message';
 
 const onSubmit = async (text, publicMessages) => {
   await mkdirp('/messages', publicMessages);
@@ -32,9 +33,7 @@ const Chat = ({ publicMessages, profile }) => {
 
   console.log(messages);
   return (
-    <Flex flexDirection='column' maxWidth={800}>
-      <Flex height={600} width='100%' bg='gray.50' mb={2}>
-      </Flex>
+    <Flex flexDirection='column' maxWidth={800} style={{ margin: '0 auto' }}>
       <Flex>
         <Input
           placeholder="Chirp chirp to #public"
@@ -49,6 +48,20 @@ const Chat = ({ publicMessages, profile }) => {
             }
           }}
         />
+      </Flex>
+      <Flex
+        height={600}
+        width='100%'
+        bg='gray.50'
+        mb={2}
+        flexDirection='column'
+      >
+        {(messages || []).map(message =>
+          <Message
+            key={`${message.date_created}::${message.dat_archive}`}
+            {...message}
+          />
+        )}
       </Flex>
     </Flex>
   );
