@@ -38,9 +38,9 @@ const Chat = ({ publicMessages, profile }) => {
     <Flex flexDirection='column' maxWidth={800} style={{ margin: '0 auto' }}>
       <Flex>
         <Input
-          placeholder="Chirp chirp to #public"
+          placeholder='Chirp chirp to #public'
           borderColor='blue.200'
-          size="lg"
+          size='lg'
           onChange={e => setMessage(e.target.value)}
           value={message}
           onKeyPress={async event => {

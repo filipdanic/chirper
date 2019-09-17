@@ -17,6 +17,7 @@ export default ({
     <Flex
       flexDirection='row'
       justifyContent='space-between'
+      mb={4}
     >
       <Flex
         flexDirection='row'

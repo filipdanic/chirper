@@ -1,14 +1,5 @@
 import mkdirp from './mkdirp';
 
-export const stripExtension = (str) => {
-  return str.substr(0, str.lastIndexOf('.'));
-};
-
-export const basename = path => {
-  return stripExtension(path.split('/').reverse()[0]);
-};
-
-
 const loadPublicMessages = async (publicMessagesArchive, profile, setMessages) => {
   await mkdirp('/messages', publicMessagesArchive);
   const messageFiles = await publicMessagesArchive.readdir('/messages');
