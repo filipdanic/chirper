@@ -24,7 +24,7 @@ const loadPublicMessages = async (publicMessagesArchive, profile, setMessages) =
   }
 
   setMessages(messages.sort(
-    (a, b) => new Date(a.date_created).getTime() < new Date(b.date_created).getTime() ? -1 : 1
+    (a, b) => new Date(a.date_created).getTime() > new Date(b.date_created).getTime() ? -1 : 1
   ));
 };
 

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import {Flex, Box, ThemeProvider, UIModeProvider, Input} from 'chakra-ui';
+import { Router } from '@reach/router';
+import { Box, ThemeProvider, UIModeProvider } from 'chakra-ui';
 import usePublicProfile from './utils/usePublicProfile';
-import handleCreateProfile from './utils/handleCreateProfile';
-import loadPublicMessagesArchive from './utils/loadPublicMessagesArchive';
-import PrimaryButton from './component/PrimaryButton';
-import handleLogout from './utils/handleLogout';
-import handleSelectProfile from './utils/handleSelectProfile';
 import Chat from './component/Chat';
+import NavigationBar from './component/NavigationBar';
+import Following from './component/Following';
 
 function App() {
   const [ publicMessages, setPublicMessages ] = useState();
@@ -18,35 +16,26 @@ function App() {
     <ThemeProvider>
       <UIModeProvider>
         <Box w="100%" p={4}>
-          {isLoggedIn ?
-            <PrimaryButton onClick={() => handleLogout(setIsLoggedIn, setPublicMessages, setProfile)}>
-              Log Out
-            </PrimaryButton> :
-            <Flex
-              flexDirection='row'
-              flexWrap='nowrap'
-              justifyContent='flex-end'
-              alignItems='stretch'
-              alignContent='stretch'
-            >
-              <PrimaryButton onClick={async () => {
-                await handleCreateProfile(setIsLoggedIn);
-                await loadPublicMessagesArchive(setPublicMessages, setIsLoggedIn, setProfile);
-              }}>
-                Create Profile
-              </PrimaryButton>
-              <PrimaryButton onClick={async () => {
-                await handleSelectProfile(setPublicMessages, setIsLoggedIn, setProfile);
-              }}>
-                Load Profile
-              </PrimaryButton>
-            </Flex>
-          }
-          {isLoggedIn && profile &&
+          <NavigationBar
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            setPublicMessages={setPublicMessages}
+            setProfile={setProfile}
+          />
+          <Router>
             <Chat
+              path='/'
+              shouldDisplay={isLoggedIn && profile}
               publicMessages={publicMessages}
               profile={profile}
-            />}
+            />
+            <Following
+              path='/following'
+              shouldDisplay={isLoggedIn && profile}
+              profile={profile}
+            />
+          </Router>
+
         </Box>
       </UIModeProvider>
     </ThemeProvider>

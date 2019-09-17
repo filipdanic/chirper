@@ -10,7 +10,7 @@ const loadPublicMessagesArchive = async (setPublicMessages, setIsLoggedIn, setPr
     setIsLoggedIn(true);
     try {
       const profile = JSON.parse(await publicMessages.readFile('/profile.json'));
-      setProfile(profile);
+      setProfile({ ...profile, publicArchiveUrl: localStorage.publicMessagesUrl });
     } catch (e) {}
   }
 };

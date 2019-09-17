@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Flex, Input, Text} from 'chakra-ui';
+import { Flex, Input } from 'chakra-ui';
 import uuidv4 from 'uuidv4';
 import mkdirp from '../utils/mkdirp';
 import loadPublicMessages from '../utils/loadPublicMessages';
@@ -29,9 +29,11 @@ const Chat = ({ publicMessages, profile }) => {
       await loadPublicMessages(publicMessages, profile, setMessages);
     }
     onMount();
+
+    const timer = setInterval(onMount, 500);
+    return () => clearInterval(timer);
   }, []);
 
-  console.log(messages);
   return (
     <Flex flexDirection='column' maxWidth={800} style={{ margin: '0 auto' }}>
       <Flex>
@@ -53,7 +55,7 @@ const Chat = ({ publicMessages, profile }) => {
         height={600}
         width='100%'
         bg='gray.50'
-        mb={2}
+        mt={2}
         flexDirection='column'
       >
         {(messages || []).map(message =>
@@ -67,4 +69,9 @@ const Chat = ({ publicMessages, profile }) => {
   );
 };
 
-export default Chat;
+const ChatHoC = ({ publicMessages, profile, shouldDisplay }) =>
+  shouldDisplay ?
+    <Chat publicMessages={publicMessages} profile={profile} /> :
+    <React.Fragment />;
+
+export default ChatHoC;

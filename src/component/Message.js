@@ -20,10 +20,10 @@ export default ({
         <Tooltip hasArrow label={truncateDatArchiveURL(dat_archive)}>
           <Icon
             name='view'
-            size='14px'
+            size='12px'
             p={1}
             onClick={onCopy}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', marginBottom: 2 }}
             color='gray.500'
           />
         </Tooltip>
