@@ -25,20 +25,25 @@ const Chat = ({ publicMessages, profile }) => {
   const [ message, setMessage ] = useState('');
   const [ messages, setMessages ] = useState([]);
   useEffect(() => {
+    const addMessages = (data) => {
+      setMessages(m =>
+        m
+          .concat(data)
+          .sort((a, b) =>
+            new Date(a.date_created).getTime() > new Date(b.date_created).getTime() ? -1 : 1)
+      );
+    };
     async function onMount() {
-      await loadPublicMessages(publicMessages, profile, setMessages);
+      await loadPublicMessages(publicMessages, profile, addMessages);
     }
     onMount();
-
-    const timer = setInterval(onMount, 500);
-    return () => clearInterval(timer);
   }, []);
 
   return (
     <Flex flexDirection='column' maxWidth={800} style={{ margin: '0 auto' }}>
       <Flex>
         <Input
-          placeholder='Chirp chirp to #public'
+          placeholder='Chirp, chirp to #public!'
           borderColor='blue.200'
           size='lg'
           onChange={e => setMessage(e.target.value)}
@@ -52,7 +57,7 @@ const Chat = ({ publicMessages, profile }) => {
         />
       </Flex>
       <Flex
-        height={600}
+        minHeight={200}
         width='100%'
         bg='gray.50'
         mt={2}

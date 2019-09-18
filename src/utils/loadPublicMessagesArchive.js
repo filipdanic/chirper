@@ -8,10 +8,8 @@ const loadPublicMessagesArchive = async (setPublicMessages, setIsLoggedIn, setPr
     );
     setPublicMessages(publicMessages);
     setIsLoggedIn(true);
-    try {
-      const profile = JSON.parse(await publicMessages.readFile('/profile.json'));
-      setProfile({ ...profile, publicArchiveUrl: localStorage.publicMessagesUrl });
-    } catch (e) {}
+    const profile = JSON.parse(await publicMessages.readFile('/profile.json'));
+    setProfile({ ...profile, publicArchiveUrl: localStorage.publicMessagesUrl });
   }
 };
 
