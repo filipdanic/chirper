@@ -1,4 +1,6 @@
-# HeapChat
+![Logo](readme_header.png)
+
+# Chirper
 
 A simple chat application that uses the [DAT p2p protocol.](https://dat.foundation/) Built for my talk _“It’s Time to Reinvent the Web, Without the Internet”_ at the [Heapcon 2019](https://heapcon.io) conference in Belgrade.
 
