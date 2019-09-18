@@ -1,10 +1,10 @@
 const handleCreateProfile = async () => {
   const username = window.prompt('Public username?');
   const publicMessages = await window.DatArchive.create({
-    title: `HeapChat (Public) | ${username}`,
-    description: 'The Archive that will be used for your public HeapChat messages.',
+    title: `Chirper (Public) | ${username}`,
+    description: 'The Archive that will be used for your public Chirper messages.',
     prompt: false,
-    type: ['heapchat-public']
+    type: ['chirper-public']
   });
   await publicMessages.writeFile(
     '/profile.json',

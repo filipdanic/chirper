@@ -44,7 +44,7 @@ const Chat = ({ publicMessages, profile }) => {
       <Flex>
         <Input
           placeholder='Chirp, chirp to #public!'
-          borderColor='blue.200'
+          borderColor='blue.300'
           size='lg'
           onChange={e => setMessage(e.target.value)}
           value={message}

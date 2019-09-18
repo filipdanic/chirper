@@ -6,6 +6,7 @@ import handleLogout from '../utils/handleLogout';
 import handleCreateProfile from '../utils/handleCreateProfile';
 import loadPublicMessagesArchive from '../utils/loadPublicMessagesArchive';
 import handleSelectProfile from '../utils/handleSelectProfile';
+import logo from '../assets/logo.svg';
 
 export default ({
   isLoggedIn,
@@ -18,6 +19,8 @@ export default ({
       flexDirection='row'
       justifyContent='space-between'
       mb={4}
+      pr={8}
+      pl={8}
     >
       <Flex
         flexDirection='row'
@@ -26,9 +29,10 @@ export default ({
         alignItems='stretch'
         alignContent='stretch'
       >
+
         <Link to='/' style={{ textDecoration: 'none' }}>
           <PrimaryButton onClick={() => {}}>
-            Home
+            <img src={logo} style={{ height: 24, marginRight: 12, alignSelf: 'center' }} /> Home
           </PrimaryButton>
         </Link>
         <Link to='/following' style={{ textDecoration: 'none' }}>

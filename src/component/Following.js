@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Input } from 'chakra-ui';
-import { Code, useClipboard } from '@chakra-ui/core';
+import {Avatar, Code, useClipboard} from '@chakra-ui/core';
 import { Icon } from '@chakra-ui/core';
 import loadFollowedProfiles from '../utils/loadFollowedProfiles';
 import PrimaryButton from './PrimaryButton';
@@ -61,7 +61,11 @@ const Following = ({ profile }) => {
           Follow someone to see their chrips™!️
         </p>}
       {followedProfiles.map(profile =>
-        <UsernameWithDATAddress {...profile} key={profile.dat_archive} />
+        <Flex mb={4} alignItems='center' key={profile.dat_archive} >
+          <Avatar name={profile.username} size='xs' mr={2} />
+          <UsernameWithDATAddress {...profile} />
+        </Flex>
+
       )}
     </Flex>
   );
