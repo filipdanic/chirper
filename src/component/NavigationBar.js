@@ -32,7 +32,13 @@ export default ({
 
         <Link to='/' style={{ textDecoration: 'none' }}>
           <PrimaryButton onClick={() => {}}>
-            <img src={logo} style={{ height: 24, marginRight: 12, alignSelf: 'center' }} /> Home
+            <img
+              src={logo}
+              style={{ height: 24, marginRight: 12, alignSelf: 'center' }}
+              alt='Logo'
+            />
+            {' '}
+            Home
           </PrimaryButton>
         </Link>
         <Link to='/following' style={{ textDecoration: 'none' }}>

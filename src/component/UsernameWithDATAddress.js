@@ -6,7 +6,7 @@ const truncateDatArchiveURL = (str) =>
   str.substr(0, 12) + `…` + str.substr(str.length - 4, str.length - 1);
 
 export default ({ username, dat_archive }) => {
-  const { onCopy, hasCopied } = useClipboard(dat_archive);
+  const { onCopy } = useClipboard(dat_archive);
   return (
     <Text as='p' m={0} color='gray.500'>
       <strong>@{username}</strong>

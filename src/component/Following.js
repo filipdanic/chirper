@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Input } from 'chakra-ui';
-import {Avatar, Code, useClipboard} from '@chakra-ui/core';
-import { Icon } from '@chakra-ui/core';
+import { Code, useClipboard } from '@chakra-ui/core';
 import loadFollowedProfiles from '../utils/loadFollowedProfiles';
 import PrimaryButton from './PrimaryButton';
 import followNewProfile from '../utils/followNewProfile';
-import UsernameWithDATAddress from './UsernameWithDATAddress';
+import usePeerDiscovery from '../utils/usePeerDiscovery';
+import FollowList from './FollowList';
+
+const addFoundPeer = (setFoundPeers) => (peer) =>
+  setFoundPeers(peers => peers.concat([peer]));
 
 const Following = ({ profile }) => {
   const { onCopy } = useClipboard(profile.publicArchiveUrl);
   const [ newProfile, setNewProfile ] = useState('');
   const [ followedProfiles, setFollowedProfiles ] = useState([]);
+  const [ foundPeers, setFoundPeers ] = useState([]);
 
+  usePeerDiscovery(
+    profile.publicArchiveUrl,
+    profile.username,
+    addFoundPeer(setFoundPeers)
+  );
   useEffect(() => {
     const onMount = async () => {
       await loadFollowedProfiles(profile.publicArchiveUrl, setFollowedProfiles);
@@ -29,6 +38,7 @@ const Following = ({ profile }) => {
       >
         {profile.publicArchiveUrl}
       </Code>
+
       <h3>Follow a Public Profile</h3>
       <Flex>
         <Input
@@ -48,25 +58,20 @@ const Following = ({ profile }) => {
           Follow
         </PrimaryButton>
       </Flex>
-      <h3>Following:</h3>
-      {followedProfiles.length === 0 &&
-        <p>
-          <Icon
-            name='info'
-            size='16px'
-            p={2}
-            mt={'-4px'}
-            color='gray.500'
-          />
-          Follow someone to see their chrips™!️
-        </p>}
-      {followedProfiles.map(profile =>
-        <Flex mb={4} alignItems='center' key={profile.dat_archive} >
-          <Avatar name={profile.username} size='xs' mr={2} />
-          <UsernameWithDATAddress {...profile} />
-        </Flex>
 
-      )}
+      <FollowList
+        title='Following:'
+        emptyStateMessage='Follow someone to see their chrips™!️'
+        items={followedProfiles}
+        showIfEmpty={true}
+      />
+
+      <FollowList
+        title='Currently chirping:'
+        emptyStateMessage=''
+        items={foundPeers}
+        showIfEmpty={false}
+      />
     </Flex>
   );
 };
