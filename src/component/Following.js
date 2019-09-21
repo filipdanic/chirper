@@ -69,7 +69,7 @@ const Following = ({ profile }) => {
         showIfEmpty={true}
       />
 
-      <Flex>
+      <Flex mt={2} mb={2}>
         <Checkbox
           size='lg'
           style={{ borderColor: 'blueviolet' }}

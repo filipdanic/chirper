@@ -33,7 +33,7 @@ const FollowList = ({
         >
           {items.map(profile =>
             <Flex p={4} alignItems='center' key={profile.dat_archive} >
-              <Avatar name={profile.username} size='xs' mr={2} />
+              <Avatar name={profile.username} size='sm' mr={2} />
               <UsernameWithDATAddress {...profile} />
             </Flex>
           )}
