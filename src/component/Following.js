@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Input } from 'chakra-ui';
 import { Code, useClipboard } from '@chakra-ui/core';
+import { Checkbox } from '@chakra-ui/core';
 import loadFollowedProfiles from '../utils/loadFollowedProfiles';
 import PrimaryButton from './PrimaryButton';
 import followNewProfile from '../utils/followNewProfile';
@@ -13,13 +14,15 @@ const addFoundPeer = (setFoundPeers) => (peer) =>
 const Following = ({ profile }) => {
   const { onCopy } = useClipboard(profile.publicArchiveUrl);
   const [ newProfile, setNewProfile ] = useState('');
+  const [ enabledDiscovery, toggleEnabledDiscovery ] = useState(false);
   const [ followedProfiles, setFollowedProfiles ] = useState([]);
   const [ foundPeers, setFoundPeers ] = useState([]);
 
   usePeerDiscovery(
     profile.publicArchiveUrl,
     profile.username,
-    addFoundPeer(setFoundPeers)
+    addFoundPeer(setFoundPeers),
+    enabledDiscovery
   );
   useEffect(() => {
     const onMount = async () => {
@@ -66,12 +69,26 @@ const Following = ({ profile }) => {
         showIfEmpty={true}
       />
 
-      <FollowList
-        title='Currently chirping:'
-        emptyStateMessage=''
-        items={foundPeers}
-        showIfEmpty={false}
-      />
+      <Flex>
+        <Checkbox
+          size='lg'
+          style={{ borderColor: 'blueviolet' }}
+          variantColor='purple'
+          isChecked={enabledDiscovery}
+          onChange={e => toggleEnabledDiscovery(e.target.checked)}
+        >
+          {enabledDiscovery ? 'Leave the channel' : 'Join the Chirper live channel'}
+        </Checkbox>
+      </Flex>
+
+      {enabledDiscovery &&
+        <FollowList
+          title='Currently chirping:'
+          emptyStateMessage=''
+          items={foundPeers}
+          showIfEmpty={false}
+        /> }
+
     </Flex>
   );
 };
