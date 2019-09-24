@@ -5,10 +5,10 @@ import {Icon, Tooltip, useClipboard} from '@chakra-ui/core';
 const truncateDatArchiveURL = (str) =>
   str.substr(0, 12) + `…` + str.substr(str.length - 4, str.length - 1);
 
-export default ({ username, dat_archive }) => {
+export default ({ username, dat_archive, ...props }) => {
   const { onCopy } = useClipboard(dat_archive);
   return (
-    <Text as='p' m={0} color='gray.500'>
+    <Text as='p' m={0} color='gray.500' {...props}>
       <strong>@{username}</strong>
       <Tooltip hasArrow label={truncateDatArchiveURL(dat_archive)}>
         <Icon

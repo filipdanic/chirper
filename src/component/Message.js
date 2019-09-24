@@ -15,10 +15,18 @@ export default ({
         <Avatar name={username} size='sm' />
       </Flex>
       <Flex flexDirection='column'>
-        <UsernameWithDATAddress
-          username={username}
-          dat_archive={dat_archive}
-        />
+        <Flex>
+          <UsernameWithDATAddress
+            username={username}
+            dat_archive={dat_archive}
+            style={{ display: 'flex', flex: 1, alignSelf: 'flex-start' }}
+          />
+          <Flex alignSelf='flex-end'>
+            <Text as='p' m={0} fontSize='0.8rem' color='gray.500'>
+              {new Date(date_created).toLocaleString()}
+            </Text>
+          </Flex>
+        </Flex>
         <Text as='p' m={0} fontSize='1.2rem'>
           {text}
         </Text>
