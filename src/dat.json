@@ -1,0 +1,5 @@
+{
+  "title": "Chirper: The p2p Twitter built on DAT",
+  "description": "Chirper is a p2p Twitter wannabe-clone build on Dat.",
+  "fallback_page": "/"
+}
