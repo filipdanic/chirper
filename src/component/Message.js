@@ -14,7 +14,7 @@ export default ({
       <Flex mr={4}>
         <Avatar name={username} size='sm' />
       </Flex>
-      <Flex flexDirection='column'>
+      <Flex flexDirection='column' width='100%'>
         <Flex>
           <UsernameWithDATAddress
             username={username}

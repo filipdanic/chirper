@@ -77,6 +77,9 @@ const Chat = ({ publicMessages, profile }) => {
 const ChatHoC = ({ publicMessages, profile, shouldDisplay }) =>
   shouldDisplay ?
     <Chat publicMessages={publicMessages} profile={profile} /> :
-    <React.Fragment />;
+    <Flex flexDirection='column' alignItems='center' mt={12}>
+      <h1>Start Chirping today!</h1>
+      <p>Make sure to open the app in the Beaker Browser.</p>
+    </Flex>;
 
 export default ChatHoC;

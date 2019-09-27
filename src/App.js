@@ -35,7 +35,6 @@ function App() {
               profile={profile}
             />
           </Router>
-
         </Box>
       </UIModeProvider>
     </ThemeProvider>
